@@ -3,9 +3,77 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1, initial-scale=1.0" />
-    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <title>Rock Paper Scissors | Omer Gronich</title>
+    <script
+      src="https://kit.fontawesome.com/88ab1ebf3e.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
+    <main class="wrapper">
+      <div class="wrapper__border-container">
+        <section class="section-header">
+          <div class="u-text-center">
+            <h1 class="heading-primary">Rock Paper Scissors</h1>
+          </div>
+        </section>
+
+        <section class="section-computer-side">
+          <div class="u-text-center computer">
+            <h2 class="heading-secondary">Computer</h2>
+            <i class="section-computer-side__computer fas fa-desktop fa-4x"></i>
+            <figure class="hand-container u-margin-top-small">
+              <img class="hand-container__hand" src="img/rock.png" alt="rock" />
+            </figure>
+          </div>
+        </section>
+        <div class="u-text-center">
+          <button class="btn btn--reset">Play Again</button>
+        </div>
+        <section class="section-user-side">
+          <figure class="hand-container u-margin-top-medium">
+            <img
+              class="hand-container__hand hand-container__hand--paper"
+              src="img/paper.png"
+              alt="paper"
+            />
+            <img
+              class="hand-container__hand hand-container__hand--rock"
+              src="img/rock.png"
+              alt="rock"
+            />
+            <img
+              class="hand-container__hand hand-container__hand--scissors"
+              src="img/scissors.png"
+              alt="scissors"
+            />
+          </figure>
+          <div class="u-text-center">
+            <i class="section-user-side__user fas fa-user fa-4x"></i>
+            <h2 class="heading-secondary">User</h2>
+          </div>
+        </section>
+
+        <div class="scoreboard">
+          <div class="u-text-center">
+            <span class="round-result u-margin-small"></span>
+          </div>
+          <h2 class="heading-secondary u-text-center">Round <span></span></h2>
+          <div class="scoreboard__scores">
+            <div class="scoreboard__scores--user-score">
+              <h3 class="heading-tertiary">User Score:</h3>
+              <div>0</div>
+            </div>
+            <div class="scoreboard__scores--computer-score">
+              <h3 class="heading-tertiary">Computer Score:</h3>
+              <div>0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
     <script src="app.js"></script>
   </body>
 </html>

@@ -1,0 +1,15 @@
+.btn {
+  width: 20rem;
+  height: 4rem;
+  font-size: 1.6rem;
+  cursor: pointer;
+  background-color: transparent;
+  text-align: center;
+  outline: none;
+
+  &--reset {
+    border: 1px solid $color-primary;
+    margin: 0 auto;
+    visibility: hidden;
+  }
+}

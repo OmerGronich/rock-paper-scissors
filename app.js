@@ -1,77 +1,124 @@
-var playerScore = 0;
-var computerScore = 0;
-var gameChoices = ['rock', 'paper', 'scissors'];
+let playerScore = 0;
+let computerScore = 0;
+let gameChoices = ['rock', 'paper', 'scissors'];
+let round = 1;
+const hands = document.querySelectorAll('.hand-container__hand');
+const roundSpan = document.querySelector('.scoreboard .heading-secondary span');
+const userScoreDiv = document.querySelector(
+  '.scoreboard__scores--user-score div'
+);
+const computerScoreDiv = document.querySelector(
+  '.scoreboard__scores--computer-score div'
+);
+const roundResult = document.querySelector('.round-result');
+const gameResult = document.querySelector('.heading-primary');
+let computerHand = document.querySelector(
+  '.section-computer-side .hand-container__hand'
+);
 
-// Function that prints each player's score every round
-var score = function() {
-  return `Player score: ${playerScore}, Computer score: ${computerScore}`;
-};
-
-// Generating random computer choice
 function computerPlay() {
-  var randomNum = Math.floor(Math.random() * gameChoices.length);
+  let randomNum = Math.floor(Math.random() * gameChoices.length);
+  if (randomNum === 3) {
+    return gameChoices[2];
+  }
   return gameChoices[randomNum];
 }
 
-// Game function
-function game() {
-  // For now hard coding 5 rounds, will change in the future
-  for (var i = 1; i <= 5; i++) {
-    // Validation - making sure that player picks the right choice
-    const playerSelection = prompt(
-      'Pick either Rock, Paper or Scissors'
-    ).toLowerCase();
-    const computerSelection = computerPlay().toLowerCase();
+// Player selection
+let playerSelection;
+const selectionContianer = document.querySelector(
+  '.section-user-side .hand-container'
+);
 
-    if (gameChoices.includes(playerSelection.toLowerCase())) {
-      console.log(playRound(playerSelection, computerSelection));
+selectionContianer.addEventListener('click', function(e) {
+  if (e.target.attributes.alt.value === 'rock') {
+    playerSelection = 'rock';
+  } else if (e.target.attributes.alt.value === 'paper') {
+    playerSelection = 'paper';
+  } else if (e.target.attributes.alt.value === 'scissors') {
+    playerSelection = 'scissors';
+  }
+
+  let computerSelection = computerPlay().toLowerCase();
+
+  computerHand.attributes.src.value = `img/${computerSelection}.png`;
+  if (computerHand.attributes.src.value === 'img/paper.png') {
+    computerHand.style.transform = 'rotateX(180deg)';
+  } else if (computerHand.attributes.src.value === 'img/rock.png') {
+    computerHand.style.transform = 'rotateZ(-45deg)';
+  } else if (computerHand.attributes.src.value === 'img/scissors.png') {
+    computerHand.style.transform = 'rotateX(0)';
+  }
+
+  playRound(playerSelection, computerSelection);
+});
+
+const playRound = function(playerSelection, computerSelection) {
+  if (playerSelection === 'rock' && computerSelection === 'scissors') {
+    ++playerScore;
+    roundResult.textContent = `You win round ${round}! ${playerSelection} beats ${computerSelection}`;
+  } else if (playerSelection === 'rock' && computerSelection === 'paper') {
+    ++computerScore;
+    roundResult.textContent = `You lose round ${round}! ${computerSelection} beats ${playerSelection}`;
+  } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
+    ++computerScore;
+    roundResult.textContent = `You lose round ${round}! ${computerSelection} beats ${playerSelection}`;
+  } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
+    ++playerScore;
+    roundResult.textContent = `You win round ${round}! ${playerSelection} beats ${computerSelection}`;
+  } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
+    ++computerScore;
+    roundResult.textContent = `You lose round ${round}! ${computerSelection} beats ${playerSelection}`;
+  } else if (playerSelection === 'paper' && computerSelection === 'rock') {
+    ++playerScore;
+    roundResult.textContent = `You win round ${round}! ${playerSelection} beats ${computerSelection}`;
+  } else if (playerSelection === computerSelection) {
+    roundResult.textContent = `Round ${round} is a tie!`;
+  }
+
+  // updating scoreboard
+
+  roundSpan.textContent = `${round}`;
+
+  userScoreDiv.textContent = `${playerScore}`;
+
+  computerScoreDiv.textContent = `${computerScore}`;
+
+  if (round < 5) {
+    ++round;
+  } else {
+    roundSpan.textContent = 5;
+
+    hands.forEach(hand => {
+      hand.style.visibility = 'hidden';
+    });
+
+    if (playerScore > computerScore) {
+      gameResult.textContent = 'You win! Best out of five';
+    } else if (playerScore < computerScore) {
+      gameResult.textContent = 'You lost! try again';
     } else {
-      alert('Oops! You need to pick either rock, paper or scissors');
-      --i; //making sure i that the round isn't skipped
+      gameResult.textContent = "It's a tie! Have another go";
     }
+
+    resetBtn.style.visibility = 'visible';
   }
+};
 
-  // The basic logic of a round
-  function playRound(playerSelection, computerSelection) {
-    console.log(`---Round ${i}---`);
-    if (playerSelection === 'rock' && computerSelection === 'scissors') {
-      ++playerScore;
-      return `You win round ${i}! ${playerSelection} beats ${computerSelection}\n---${score()}---`;
-    } else if (playerSelection === 'rock' && computerSelection === 'paper') {
-      ++computerScore;
-      return `You lose round ${i}! ${computerSelection} beats ${playerSelection}\n---${score()}---`;
-    } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-      ++computerScore;
-      return `You lose round ${i}! ${computerSelection} beats ${playerSelection}\n---${score()}---`;
-    } else if (
-      playerSelection === 'scissors' &&
-      computerSelection === 'paper'
-    ) {
-      ++playerScore;
-      return `You win round ${i}! ${playerSelection} beats ${computerSelection}\n---${score()}---`;
-    } else if (
-      playerSelection === 'paper' &&
-      computerSelection === 'scissors'
-    ) {
-      ++computerScore;
-      return `You lose round ${i}! ${computerSelection} beats ${playerSelection}\n---${score()}---`;
-    } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-      ++playerScore;
-      return `You win round ${i}! ${playerSelection} beats ${computerSelection}\n---${score()}---`;
-    } else if (playerSelection === computerSelection) {
-      return `Round ${i} is a tie!\n---${score()}---`;
-    }
-  }
-
-  i = --i;
-
-  var winner =
-    playerScore > computerScore
-      ? `You win! Best out of ${i}`
-      : playerScore === computerScore
-      ? `It's a tie! No one wins.`
-      : `Computer wins! Best out of ${i}`;
-
-  return winner;
-}
-console.log(game());
+const resetBtn = document.querySelector('.btn--reset');
+resetBtn.addEventListener('click', function() {
+  hands.forEach(hand => {
+    hand.style.visibility = 'visible';
+  });
+  playerScore = 0;
+  computerScore = 0;
+  round = 1;
+  roundSpan.textContent = `${round}`;
+  userScoreDiv.textContent = `${playerScore}`;
+  computerScoreDiv.textContent = `${computerScore}`;
+  roundResult.textContent = '';
+  gameResult.textContent = 'Rock Paper Scissors';
+  resetBtn.style.visibility = 'hidden';
+  computerHand.attributes.src.value = 'img/rock.png';
+  computerHand.style.transform = 'rotateZ(-45deg)';
+});

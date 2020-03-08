@@ -1,0 +1,10 @@
+.hand-container {
+  margin: initial auto;
+  display: flex;
+  justify-content: center;
+
+  &__hand {
+    height: 8rem;
+    width: 8rem;
+  }
+}
