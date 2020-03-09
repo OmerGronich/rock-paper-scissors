@@ -31,26 +31,28 @@ const selectionContianer = document.querySelector(
 );
 
 selectionContianer.addEventListener('click', function(e) {
-  if (e.target.attributes.alt.value === 'rock') {
-    playerSelection = 'rock';
-  } else if (e.target.attributes.alt.value === 'paper') {
-    playerSelection = 'paper';
-  } else if (e.target.attributes.alt.value === 'scissors') {
-    playerSelection = 'scissors';
+  if (e.target.attributes.alt) {
+    if (e.target.attributes.alt.value === 'rock') {
+      playerSelection = 'rock';
+    } else if (e.target.attributes.alt.value === 'paper') {
+      playerSelection = 'paper';
+    } else if (e.target.attributes.alt.value === 'scissors') {
+      playerSelection = 'scissors';
+    }
+
+    let computerSelection = computerPlay().toLowerCase();
+
+    computerHand.attributes.src.value = `img/${computerSelection}.png`;
+    if (computerHand.attributes.src.value === 'img/paper.png') {
+      computerHand.style.transform = 'rotateX(180deg)';
+    } else if (computerHand.attributes.src.value === 'img/rock.png') {
+      computerHand.style.transform = 'rotateZ(-45deg)';
+    } else if (computerHand.attributes.src.value === 'img/scissors.png') {
+      computerHand.style.transform = 'rotateX(0)';
+    }
+
+    playRound(playerSelection, computerSelection);
   }
-
-  let computerSelection = computerPlay().toLowerCase();
-
-  computerHand.attributes.src.value = `img/${computerSelection}.png`;
-  if (computerHand.attributes.src.value === 'img/paper.png') {
-    computerHand.style.transform = 'rotateX(180deg)';
-  } else if (computerHand.attributes.src.value === 'img/rock.png') {
-    computerHand.style.transform = 'rotateZ(-45deg)';
-  } else if (computerHand.attributes.src.value === 'img/scissors.png') {
-    computerHand.style.transform = 'rotateX(0)';
-  }
-
-  playRound(playerSelection, computerSelection);
 });
 
 const playRound = function(playerSelection, computerSelection) {
@@ -105,7 +107,7 @@ const playRound = function(playerSelection, computerSelection) {
   }
 };
 
-const resetBtn = document.querySelector('.btn--reset');
+const resetBtn = document.querySelector('.btn');
 resetBtn.addEventListener('click', function() {
   hands.forEach(hand => {
     hand.style.visibility = 'visible';

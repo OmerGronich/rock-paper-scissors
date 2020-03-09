@@ -106,13 +106,14 @@ body {
 }
 
 .btn {
-  width: 20rem;
-  height: 4rem;
-  font-size: 1.6rem;
+  display: block;
+  padding: 1rem 10rem;
+  font-size: 1.8rem;
   cursor: pointer;
   background-color: transparent;
   text-align: center;
   outline: none;
+  margin: 0 auto;
 }
 
 .btn--reset {
