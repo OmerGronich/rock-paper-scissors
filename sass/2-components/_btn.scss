@@ -1,9 +1,9 @@
 .btn {
   display: block;
-  padding: 1rem 10rem;
+  padding: 1rem 7rem;
   font-size: 1.8rem;
   cursor: pointer;
-  background-color: transparent;
+  background-color: $color-white;
   text-align: center;
   outline: none;
   margin: 0 auto;
@@ -12,5 +12,10 @@
     border: 1px solid $color-primary;
     margin: 0 auto;
     visibility: hidden;
+    position: absolute;
+    top: 44%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
   }
 }

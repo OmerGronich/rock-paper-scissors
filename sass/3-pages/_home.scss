@@ -3,6 +3,7 @@ section {
 }
 
 .wrapper {
+  position: relative;
   max-height: 95%;
   max-width: 95%;
   height: 95vh;
@@ -51,8 +52,8 @@ section {
 
 .section-user-side {
   position: relative;
-  height: 50%;
-  top: 50%;
+
+  margin: 3rem 0 0 0;
 
   &__user {
     background-image: linear-gradient(
@@ -78,21 +79,12 @@ section {
         margin-right: 4rem;
 
         &:hover {
-          transform: rotateY(180deg) rotateZ(-45deg) translate(1rem, -1rem);
+          transform: rotateY(180deg) rotateZ(-45deg) translate(0.5rem, -0.5rem);
           opacity: 0.6;
         }
         &:active {
-          transform: rotateY(180deg) rotateZ(-45deg) translate(1.5rem, -1.5rem);
+          transform: rotateY(180deg) rotateZ(-45deg) translate(0.7rem, -0.7rem);
           opacity: 0.9;
-        }
-
-        &.chosen {
-          margin: 0 auto;
-
-          &:hover {
-            transform: rotateY(180deg) rotateZ(-45deg) translate(0, 0);
-            cursor: default;
-          }
         }
       }
 
@@ -100,20 +92,12 @@ section {
         transform: rotateY(180deg) rotateZ(45deg);
         margin-right: 4rem;
         &:hover {
-          transform: rotateY(180deg) rotateZ(45deg) translate(-1rem, -1rem);
+          transform: rotateY(180deg) rotateZ(45deg) translate(-0.5rem, -0.5rem);
           opacity: 0.6;
         }
         &:active {
-          transform: rotateY(180deg) rotateZ(45deg) translate(-0.5rem, -0.5rem);
+          transform: rotateY(180deg) rotateZ(45deg) translate(-0.7rem, -0.7rem);
           opacity: 0.9;
-        }
-
-        &.chosen {
-          margin-right: 0;
-          &:hover {
-            transform: rotateY(180deg) rotateZ(45deg) translate(0, 0);
-            cursor: default;
-          }
         }
       }
 
@@ -121,20 +105,12 @@ section {
         transform: rotateY(180deg) rotateZ(-70deg);
 
         &:hover {
-          transform: rotateY(180deg) rotateZ(-75deg) translateX(2rem);
+          transform: rotateY(180deg) rotateZ(-75deg) translateX(1rem);
           opacity: 0.6;
         }
         &:active {
-          transform: rotateY(180deg) rotateZ(-75deg) translateX(2.5rem);
+          transform: rotateY(180deg) rotateZ(-75deg) translateX(1.5rem);
           opacity: 0.9;
-        }
-
-        &.chosen {
-          margin-right: 0;
-          &:hover {
-            transform: rotateY(180deg) rotateZ(-70deg) translateX(0rem);
-            cursor: default;
-          }
         }
       }
     }
@@ -148,7 +124,7 @@ section {
   border-bottom: none;
   text-align: left;
   position: absolute;
-  bottom: 2.5rem;
+  bottom: 0.5rem;
   left: 50%;
   transform: translateX(-48%);
   padding-bottom: 5rem;
@@ -168,7 +144,18 @@ section {
   }
 }
 
+@media (max-width: 970px) {
+  .hand-container,
+  .section-user-side {
+    margin-bottom: 0;
+  }
+}
+
 @media (max-width: 768px) {
+  .wrapper__border-container {
+    overflow: hidden;
+  }
+
   .heading-primary {
     font-size: 2.5rem;
     word-spacing: 1rem;
@@ -179,6 +166,15 @@ section {
     }
   }
 
+  .heading-primary {
+    font-size: 2rem;
+  }
+
+  .btn--reset {
+    padding: 1rem 2rem;
+    top: 38% !important;
+  }
+
   .heading-tertiary {
     font-size: 1.4rem;
   }
@@ -187,5 +183,30 @@ section {
     width: 100%;
     border: none;
     text-align: center;
+  }
+
+  .hand-container__hand {
+    height: 5rem;
+    width: 5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@media (max-width: 360px) {
+  body {
+    font-size: 0.6rem;
+  }
+
+  .heading-primary {
+    font-size: 1.6rem;
+  }
+
+  .btn--reset {
+    padding: 1rem 2rem;
+    top: 40% !important;
+  }
+
+  .scoreboard {
+    transform: translateX(-53%);
   }
 }
